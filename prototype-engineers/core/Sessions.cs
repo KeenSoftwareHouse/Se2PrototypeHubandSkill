@@ -1,5 +1,5 @@
-// SE2Core - shared prototype core. VENDORED: edit the original in the prototype-engineers skill (core\),
-// then run scripts\update-core.ps1. Do not edit a project's copy.
+// SE2Core - shared prototype core. VENDORED from the prototype-engineers skill (core\). It changes
+// only with a skill update; scripts\update-core.ps1 then refreshes this copy. Do not edit either.
 using Keen.Game2.Game.SessionComponents;
 using Keen.Game2.Simulation.RuntimeSystems.CoreScenes;
 using Keen.VRage.Core;

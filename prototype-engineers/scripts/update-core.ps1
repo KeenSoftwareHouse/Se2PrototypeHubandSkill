@@ -1,6 +1,6 @@
 # Refreshes the vendored SE2Core\ folder in every project that has one, from this skill's core\.
-# This is how a fix to the shared core reaches all prototypes: edit core\ in the skill once, run
-# this, rebuild. Projects without SE2Core\ (not yet on the core) are listed and left alone.
+# This is how a fix to the shared core reaches all prototypes: update the skill (git pull), run
+# this, rebuild. Don't edit core\ yourself - local edits block the skill's updates. Projects without SE2Core\ (not yet on the core) are listed and left alone.
 #   update-core.ps1 -Root <folder with SE2* projects> [-Build]
 param(
     [Parameter(Mandatory)][string]$Root,

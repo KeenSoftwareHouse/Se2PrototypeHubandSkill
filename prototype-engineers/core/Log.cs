@@ -1,6 +1,6 @@
 // SE2Core - shared prototype core. VENDORED into each plugin's SE2Core\ folder.
-// The original lives in the prototype-engineers skill (core\). Edit it there, then run
-// scripts\update-core.ps1 to refresh every project. Do not edit a project's copy.
+// The original lives in the prototype-engineers skill (core\) and changes only with a skill update;
+// scripts\update-core.ps1 then refreshes every project. Do not edit either copy.
 using System.Collections.Concurrent;
 
 namespace SE2Core;

@@ -154,7 +154,8 @@ Creates and builds:
 - `SE2Core\` - shared core vendored from this skill's `core\`: `Log`, `Sessions` (client + server
   session lookup), `Feature` (check-then-patch, guarded hooks), `Bind` (tolerant member lookup),
   `GameVersion`, `Compat` (offline check) and `SE2Core.targets` (build rules). **Never edit a
-  project's copy** - edit `core\` here and run `scripts/update-core.ps1`.
+  project's copy, or `core\` here** - core fixes arrive with skill updates, and
+  `scripts/update-core.ps1` then refreshes every project.
 - `SE2Feature.csproj` (net9.0, Lib.Harmony, game DLLs referenced in place), `PluginKeys.cs`
   (rebindable keys), `run-game.ps1`, `deploy.cmd`, `package.ps1`, `tools\` (launcher + game
   finder for the zip), `README.md`.
@@ -307,9 +308,11 @@ into "one feature switches off with a clear message" or "fix one folder", never 
 
 `package.ps1 [-Version 0.2.0]` → `dist\SE2Feature_v0.2.0.zip` with the DLL, 0Harmony.dll,
 `launch.cmd` (double-click; finds the player's Steam install, checks it is at least the build the
-plugin was compiled against - recorded in `built-for.txt` - and starts it with the plugin), and the
+plugin was compiled against - recorded in `built-for.txt` - and starts it with the plugin),
+Harmony's licence (`0Harmony-LICENSE.txt`, required when its DLL is redistributed) and the
 README. Fill the README's TODOs (what it does, how to trigger it, keys, known limits) before
-packaging. It needs the game build it was compiled against or newer; on a newer build the feature
+packaging, and **keep its "Before you run it" note**: a plugin is code with full access to the
+player's PC, so the reader must be told to run it only if they trust the sender. It needs the game build it was compiled against or newer; on a newer build the feature
 checks decide what still works (run compat-check to know in advance). Never upload or publish the
 zip anywhere yourself; hand the path to the user.
 
@@ -326,8 +329,11 @@ reports which features still pass on the new build as shipped, whether it rebuil
 features pass after a rebuild. Fix what it reports in `Game\` (`api-search.ps1` for the new names;
 `"New|Old"` method strings and `Bind.ReadAs` keep one DLL working on both builds), then rebuild.
 
-**Core fix → every prototype**: edit `core\` in this skill, bump `CoreVersion` in `core\Compat.cs`,
-then `scripts/update-core.ps1 -Root <folder> -Build` refreshes each project's `SE2Core\` and rebuilds.
+**Core fix → every prototype**: core fixes arrive with a skill update. After updating,
+`scripts/update-core.ps1 -Root <folder> -Build` refreshes each project's `SE2Core\` and rebuilds.
+Don't edit `core\` yourself (local edits block the skill's updates). If the core itself has a bug,
+tell the user, work around it in the project's `Game\` code, and note it in
+`%LOCALAPPDATA%\prototype-engineers\local-discoveries.md`.
 
 ## 7. Optional follow-ups
 

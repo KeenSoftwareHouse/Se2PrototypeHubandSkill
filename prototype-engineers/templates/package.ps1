@@ -1,5 +1,5 @@
 # Builds Release and zips a package a player can run without building anything:
-#   __NAME__.dll, 0Harmony.dll, launch.cmd (double-click), launch.ps1, find-game.ps1, README.md,
+#   __NAME__.dll, 0Harmony.dll, launch.cmd (double-click), launch.ps1, find-game.ps1, README.md, 0Harmony-LICENSE.txt,
 #   built-for.txt (the game build it was compiled against - the launcher won't pick an older one)
 # Output: dist\__NAME___v<version>.zip
 param([string]$Version = "0.1.0")
@@ -21,6 +21,10 @@ Copy-Item (Join-Path $repo "tools\launch.cmd") $stage
 Copy-Item (Join-Path $repo "tools\launch.ps1") $stage
 Copy-Item (Join-Path $repo "tools\find-game.ps1") $stage
 Copy-Item (Join-Path $repo "README.md") $stage
+# Harmony is MIT: its licence text must travel with 0Harmony.dll.
+$harmonyLicense = Join-Path $repo "tools\0Harmony-LICENSE.txt"
+if (-not (Test-Path $harmonyLicense)) { throw "tools\0Harmony-LICENSE.txt is missing; it must ship with 0Harmony.dll. Copy it from the skill's templates folder." }
+Copy-Item $harmonyLicense $stage
 
 # The game build the DLL was compiled against (this machine's Game2Dir), for the launcher.
 $props = Join-Path $repo "Game2Dir.local.props"

@@ -2,6 +2,13 @@
 
 Space Engineers 2 prototype plugin. TODO: one line on what the player gets.
 
+## Before you run it
+
+This is a prototype plugin, not part of the game. A plugin is code that runs inside Space
+Engineers 2 with the same access to your PC as any program you start, and it is not signed or
+checked by anyone. Only run it if you trust the person who gave you this zip, and back up any
+save you care about first.
+
 ## Try it
 
 1. Unzip anywhere.
@@ -31,6 +38,11 @@ To rebind, create `keys.json` next to `__NAME__.dll`, e.g. `{"toggle": "Keyboard
 
 - Plugin: `%APPDATA%\SpaceEngineers2\__SHORT__\`
 - Game: `%APPDATA%\SpaceEngineers2\Temp\Logs\` (search for "Plugin NOT loaded" if nothing happens)
+
+## Third-party
+
+Uses [Harmony](https://github.com/pardeike/Harmony) (`0Harmony.dll`), MIT licence - see
+`0Harmony-LICENSE.txt`.
 
 ## Build from source
 

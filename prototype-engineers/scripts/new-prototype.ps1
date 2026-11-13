@@ -40,6 +40,7 @@ $map = [ordered]@{
     "gitignore"      = ".gitignore"
     "launch.ps1"     = "tools\launch.ps1"
     "launch.cmd"     = "tools\launch.cmd"
+    "0Harmony-LICENSE.txt" = "tools\0Harmony-LICENSE.txt"
 }
 $utf8 = [Text.UTF8Encoding]::new($false)
 foreach ($k in $map.Keys) {

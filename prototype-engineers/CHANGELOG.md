@@ -1,5 +1,18 @@
 # PrototypeEngineers skill - Changelog
 
+## 1.0.1
+
+### Added
+- Every packaged zip now carries Harmony's MIT licence (`0Harmony-LICENSE.txt`), which must travel
+  with `0Harmony.dll`. New projects get it in `tools\`; `package.ps1` stops if it is missing.
+- The project README starts with a "Before you run it" note: a plugin is unsigned code with full
+  access to the player's PC, so only run one from someone you trust, and back up saves first.
+
+### Fixed
+- The skill no longer tells you to edit its own `core\` folder, which blocked later updates. Core
+  fixes arrive with skill updates; `update-core.ps1` then refreshes each project.
+- The API cookbook header no longer lists exact build numbers.
+
 ## 1.0.0
 
 First public release.

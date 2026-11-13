@@ -1,6 +1,6 @@
 <!--
-  SE2Core build rules. VENDORED: edit the original in the prototype-engineers skill (core\), then run
-  scripts\update-core.ps1. Imported by the plugin's .csproj.
+  SE2Core build rules. VENDORED from the prototype-engineers skill (core\). It changes only with a
+  skill update; scripts\update-core.ps1 then refreshes this copy. Do not edit either. Imported by the plugin's .csproj.
 
   GAME BOUNDARY CHECK: only the game adapter may use the game's namespaces, so a game update
   means fixing the adapter, not hunting through every file. Files that MAY use Keen.*:

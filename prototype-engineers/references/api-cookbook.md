@@ -1,7 +1,7 @@
 # SE2 API cookbook
 
-Verified in game or by decompile across many prototypes on retail Steam builds (**2.3.0.2776**,
-**2.4.0.95**, **4.0**; each entry under "Local discoveries" names its build). Names drift
+Verified in game or by decompile across many prototypes on Space Engineers 2 **2.3**, **2.4** and
+**4.0** (each entry under "Local discoveries" names its version). Names drift
 between builds: treat every entry as a strong lead, and confirm with `api-search.ps1 -Decompile`
 before building on it. Each section says where the state lives (**client** or **server** session).
 
