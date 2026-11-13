@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Offline checker used by scripts\compat-check.ps1: loads a plugin + a game build's DLLs
+       (without starting the game) and runs the plugin's own SE2Core feature checks. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <!-- Runs on any newer runtime too, for machines that only have the .NET 10 SDK. -->
+    <RollForward>Major</RollForward>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>

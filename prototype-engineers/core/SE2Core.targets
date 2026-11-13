@@ -1,0 +1,31 @@
+<!--
+  SE2Core build rules. VENDORED: edit the original in the prototype-engineers skill (core\), then run
+  scripts\update-core.ps1. Imported by the plugin's .csproj.
+
+  GAME BOUNDARY CHECK: only the game adapter may use the game's namespaces, so a game update
+  means fixing the adapter, not hunting through every file. Files that MAY use Keen.*:
+    Game\**  (the adapter: hooks, game reads/writes, anything typed with game classes)
+    SE2Core\**, PluginKeys.cs, *Plugin.cs (entry point)
+  Everywhere else only Keen.VRage.Library.Mathematics (Vector3 & co, stable) is allowed.
+  Set <SE2Boundary>Warning</SE2Boundary> or Off in the .csproj to relax it (e.g. while retrofitting).
+-->
+<Project>
+  <PropertyGroup>
+    <SE2Boundary Condition="'$(SE2Boundary)' == ''">Error</SE2Boundary>
+  </PropertyGroup>
+
+  <Target Name="SE2CheckBoundary" BeforeTargets="CoreCompile" Condition="'$(SE2Boundary)' != 'Off'">
+    <ItemGroup>
+      <_SE2BoundaryFile Include="@(Compile)"
+                        Exclude="Game\**;SE2Core\**;PluginKeys.cs;*Plugin.cs;obj\**;bin\**" />
+    </ItemGroup>
+    <WriteLinesToFile File="$(IntermediateOutputPath)se2boundary.txt" Lines="@(_SE2BoundaryFile->'%(FullPath)')" Overwrite="true" />
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;$hits = Get-Content '$(IntermediateOutputPath)se2boundary.txt' | Where-Object { $_ } | ForEach-Object { Select-String -LiteralPath $_ -Pattern '^\s*(global\s+)?using\s+(static\s+)?(\w+\s*=\s*)?Keen\.(?!VRage\.Library\.Mathematics\b)' } ; foreach ($h in $hits) { Write-Output ('{0}({1}): game namespace outside the Game\ adapter: {2}' -f $h.Path, $h.LineNumber, $h.Line.Trim()) }&quot;"
+          ConsoleToMSBuild="true" StandardOutputImportance="low">
+      <Output TaskParameter="ConsoleOutput" ItemName="_SE2BoundaryHit" />
+    </Exec>
+    <Warning Condition="'$(SE2Boundary)' == 'Warning'" Text="%(_SE2BoundaryHit.Identity)" />
+    <Error Condition="'$(SE2Boundary)' == 'Error' and '@(_SE2BoundaryHit)' != ''"
+           Text="Game code outside the Game\ adapter (move it into Game\, or set SE2Boundary to Warning while retrofitting):%0a@(_SE2BoundaryHit, '%0a')" />
+  </Target>
+</Project>

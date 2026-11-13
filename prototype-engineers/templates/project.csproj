@@ -1,0 +1,81 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- The game runs on .NET 9. A newer SDK (10.x) builds this fine. -->
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <!-- Copies NuGet dependencies (0Harmony.dll) into bin so they deploy next to the plugin. -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <!-- Game2.Client defines its own AsyncVoidMethodBuilder; harmless, and a reminder to avoid async void. -->
+    <NoWarn>$(NoWarn);CS1685</NoWarn>
+    <!-- Nothing about your PC goes into the DLL: every path the compiler bakes in (the debug-symbol
+         path, [CallerFilePath], exception stack traces) becomes /_/__NAME__/... instead of
+         C:\Users\<you>\source\repos\..., and Release builds make no .pdb (it holds full source paths).
+         So a plugin you share doesn't carry your Windows username or folder layout. Debug builds keep
+         their .pdb for debugging. -->
+    <Deterministic>true</Deterministic>
+    <PathMap>$(MSBuildProjectDirectory)=/_/$(MSBuildProjectName)</PathMap>
+    <DebugType Condition="'$(Configuration)' == 'Release'">none</DebugType>
+
+    <!-- Game2 folder of the retail Steam install (contains SpaceEngineers2.exe and the game DLLs).
+         No path is stored in this file, so the project builds on any machine: this machine's path
+         is remembered in Game2Dir.local.props (git-ignored). When that file is missing or stale,
+         tools\find-game.ps1 finds the game through Steam and rewrites it. -->
+  </PropertyGroup>
+
+  <Import Project="Game2Dir.local.props" Condition="'$(Game2Dir)' == '' and Exists('Game2Dir.local.props')" />
+
+  <PropertyGroup>
+    <Game2Dir Condition="'$(Game2Dir)' != '' and !Exists('$(Game2Dir)\SpaceEngineers2.exe') and Exists('$(Game2Dir)\Game2\SpaceEngineers2.exe')">$(Game2Dir)\Game2</Game2Dir>
+  </PropertyGroup>
+
+  <!-- No usable path yet: find the game, remember it for this machine, and re-point the references. -->
+  <Target Name="ResolveGame2Dir" BeforeTargets="ResolveAssemblyReferences"
+          Condition="!Exists('$(Game2Dir)\Game2.Simulation.dll')">
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildThisFileDirectory)tools\find-game.ps1&quot; -First"
+          ConsoleToMSBuild="true" IgnoreExitCode="true" StandardOutputImportance="low">
+      <Output TaskParameter="ConsoleOutput" PropertyName="_FindGameOutput" />
+    </Exec>
+    <PropertyGroup>
+      <_FoundGame2Dir Condition="$(_FindGameOutput.Contains('|'))">$(_FindGameOutput.Split('|')[1])</_FoundGame2Dir>
+    </PropertyGroup>
+    <Error Condition="'$(_FoundGame2Dir)' == '' or !Exists('$(_FoundGame2Dir)\Game2.Simulation.dll')"
+           Text="Space Engineers 2 (Steam) not found: $(_FindGameOutput)" />
+    <PropertyGroup>
+      <Game2Dir>$(_FoundGame2Dir)</Game2Dir>
+    </PropertyGroup>
+    <WriteLinesToFile File="$(MSBuildThisFileDirectory)Game2Dir.local.props" Overwrite="true"
+                      Lines="&lt;Project&gt;&lt;PropertyGroup&gt;&lt;Game2Dir&gt;$(Game2Dir)&lt;/Game2Dir&gt;&lt;/PropertyGroup&gt;&lt;/Project&gt;" />
+    <Message Importance="high" Text="Space Engineers 2 found at $(Game2Dir) (saved to Game2Dir.local.props)" />
+    <ItemGroup>
+      <Reference Remove="@(GameRef)" />
+      <Reference Include="@(GameRef)">
+        <HintPath>$(Game2Dir)\%(Identity).dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+    </ItemGroup>
+  </Target>
+
+  <!-- Shared core (vendored into SE2Core\ - refresh with the skill's scripts\update-core.ps1) and
+       its build rules, including the game-boundary check. -->
+  <Import Project="SE2Core\SE2Core.targets" Condition="Exists('SE2Core\SE2Core.targets')" />
+
+  <ItemGroup>
+    <PackageReference Include="Lib.Harmony" Version="2.3.6" />
+  </ItemGroup>
+
+  <!-- Game assemblies: referenced in place, never copied (Private=false). Add more as needed;
+       unused references cost nothing. -->
+  <ItemGroup>
+    <GameRef Include="VRage.Library;VRage.DCS;VRage.Core;VRage.Core.Game;VRage.Game;VRage.Game.Client;VRage.Physics;VRage.Render;VRage.Multiplayer;VRage.Input;VRage.Voxels;VRage.UI;VRage.UI.Shared;Game2.Simulation;Game2.Game;Game2.Client;Avalonia.Base;Avalonia.Controls" />
+    <Reference Include="@(GameRef)">
+      <HintPath>$(Game2Dir)\%(Identity).dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>
