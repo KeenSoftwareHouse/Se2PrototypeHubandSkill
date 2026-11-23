@@ -23,8 +23,8 @@ skill in `<skill home>`".
 
 | SKILL.md says | You do |
 |---|---|
-| "this skill's folder" / `<skill>` | `<skill home>\prototype-engineers` |
-| "Before anything: is this skill current?" | Run `scripts\check-skill-update.ps1` as written. On "BEHIND", after the user agrees, run `git pull` in the skill home and re-read `SKILL.md`; skip the `install.ps1` part. |
+| "this skill's folder" / `<skill>`, and every `scripts\...` or `references\...` path | Relative to `<skill home>\prototype-engineers`. From the skill home, run scripts as `prototype-engineers\scripts\<name>.ps1`. |
+| "Before anything: is this skill current?" | Run `prototype-engineers\scripts\check-skill-update.ps1`. On "BEHIND", after the user agrees, run `git pull` in the skill home and re-read `SKILL.md`; skip the `install.ps1` part. |
 | Environment step 5, "Helper agents" / `install-agents.ps1` | Skip it. |
 | Hand a job to `pe-api-scout`, `pe-log-reader`, `pe-build-fixer` or `pe-reviewer` | If your tool can start a sub-agent or a cheaper model for a side job, give it the body of `agents\<name>.md` followed by the question. Otherwise do the job yourself, following that file's rules. |
 | Model names and token costs in "Cheaper helpers" | Ignore the numbers; keep the idea: bulky, checkable reading (decompiled code, long logs) is worth handing off or keeping short, because it stays in your context. |

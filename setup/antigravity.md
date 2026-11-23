@@ -19,10 +19,10 @@
 
 | SKILL.md says | You do |
 |---|---|
-| "this skill's folder" / `<skill>` | `<skill home>\prototype-engineers` |
-| "Before anything: is this skill current?" | Run `scripts\check-skill-update.ps1` as written. On "BEHIND", after the user agrees, run `git pull` in the skill home and re-read `SKILL.md`; skip the `install.ps1` part. |
+| "this skill's folder" / `<skill>`, and every `scripts\...` or `references\...` path | Relative to `<skill home>\prototype-engineers`. From the skill home, run scripts as `prototype-engineers\scripts\<name>.ps1`. |
+| "Before anything: is this skill current?" | Run `prototype-engineers\scripts\check-skill-update.ps1`. On "BEHIND", after the user agrees, run `git pull` in the skill home and re-read `SKILL.md`; skip the `install.ps1` part. |
 | Environment step 5, "Helper agents" / `install-agents.ps1` | Skip it. |
-| Hand a job to `pe-api-scout`, `pe-log-reader`, `pe-build-fixer` or `pe-reviewer` | Use `invoke_subagent` (on a cheaper model such as Flash where you can pick one) and give it the body of `agents\<name>.md` followed by the question. No sub-agents available in this session → do the job yourself, following that file's rules. |
+| Hand a job to `pe-api-scout`, `pe-log-reader`, `pe-build-fixer` or `pe-reviewer` | Use `invoke_subagent` with `TypeName: "self"` (the read-only `research` type cannot run the scripts or edit files) and `Model: "flash"`, and give it the body of `agents\<name>.md` followed by the question. No sub-agents available in this session → do the job yourself, following that file's rules. |
 | Model names and token costs in "Cheaper helpers" | Ignore the numbers; keep the idea: bulky, checkable reading (decompiled code, long logs) is worth handing off, because it stays in your context. |
 | "AskUserQuestion" | Your `ask_question` tool, or a plain question in chat for a simple yes/no. |
 | "next session" / "new session" | A new conversation. |

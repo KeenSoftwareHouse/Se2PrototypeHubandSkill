@@ -1,5 +1,23 @@
 # PrototypeEngineers skill - Changelog
 
+## 1.0.3
+
+### Added
+- **Setup works for more than one assistant.** One neutral prompt (in the README) gets the skill
+  and then follows `SETUP.md`, which picks a flow for the tool it is running in:
+  - **OpenAI Codex** (`setup\codex.md`, `setup\install-codex.ps1`): links the skill into Codex's own
+    skills folder.
+  - **Google Antigravity** (`setup\antigravity.md`, `setup\install-antigravity.ps1`): registers the
+    skill in Antigravity's skill registry.
+  - **Claude Code** (`setup\claude-code.md`): as before, `install.ps1`.
+  - **Anything else** (`setup\other-assistants.md`): follows the instructions directly.
+  Each flow says how to read `SKILL.md` in that tool's terms (sub-agents, asking questions). The
+  Codex and Antigravity flows were run on a PC with both installed.
+- The setup carries on in the same conversation: it checks the PC, then asks what to prototype.
+
+### Fixed
+- `SKILL.md` said the first API index takes about 10 seconds; it can take a minute or two.
+
 ## 1.0.2
 
 ### Added

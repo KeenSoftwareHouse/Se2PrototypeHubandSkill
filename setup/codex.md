@@ -5,7 +5,13 @@
    what it printed. It links `prototype-engineers` into your skills folder
    (`%USERPROFILE%\.codex\skills\`, or `%CODEX_HOME%\skills\`), so a later `git pull` in the skill's
    home folder updates the skill in place.
-   - The command writes outside the workspace: if your sandbox blocks it, ask the user to approve it.
+   - **Access first.** Setup and the skill write outside the workspace, and a sandboxed session
+     blocks that. Before running anything, ask the user for full access (or approval for each of
+     these): your skills folder (the install script), the skill home's `.git` folder (`git pull`
+     and the update check), `%LOCALAPPDATA%\prototype-engineers\` (API index, remembered Steam
+     path, saved discoveries), the folder where their prototype projects live, and read access to
+     the game folder. If the session cannot ask for approval at all, tell the user which of these
+     were blocked and stop there.
    - "SKIPPED - ... a folder this installer did not create": ask the user whether to rename that
      folder, then run the script again.
    - If linked folders turn out not to be listed as a skill on this PC, run it again with `-Copy`
@@ -22,8 +28,8 @@
 
 | SKILL.md says | You do |
 |---|---|
-| "this skill's folder" / `<skill>` | `<skill home>\prototype-engineers` |
-| "Before anything: is this skill current?" | Run `scripts\check-skill-update.ps1` as written. On "BEHIND", after the user agrees, run `git pull` in the skill home and re-read `SKILL.md`; skip the `install.ps1` part. |
+| "this skill's folder" / `<skill>`, and every `scripts\...` or `references\...` path | Relative to `<skill home>\prototype-engineers`. From the skill home, run scripts as `prototype-engineers\scripts\<name>.ps1`. |
+| "Before anything: is this skill current?" | Run `prototype-engineers\scripts\check-skill-update.ps1`. On "BEHIND", after the user agrees, run `git pull` in the skill home and re-read `SKILL.md`; skip the `install.ps1` part. It runs `git fetch`, which writes to the skill home's `.git` folder: "CHECK FAILED" in a sandboxed session usually means that write was blocked, not that you are offline. |
 | Environment step 5, "Helper agents" / `install-agents.ps1` | Skip it. |
 | Hand a job to `pe-api-scout`, `pe-log-reader`, `pe-build-fixer` or `pe-reviewer` | Spawn a sub-agent (your `spawn_agent` tool, on a cheaper model where you can pick one) and give it the body of `agents\<name>.md` followed by the question. No sub-agents available in this session → do the job yourself, following that file's rules. |
 | Model names and token costs in "Cheaper helpers" | Ignore the numbers; keep the idea: bulky, checkable reading (decompiled code, long logs) is worth handing off, because it stays in your context. |

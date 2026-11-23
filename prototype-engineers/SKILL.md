@@ -57,7 +57,7 @@ Run `scripts/check-skill-update.ps1` (read-only, it only fetches) and act on its
 3. **ilspycmd** (decompiler): `ilspycmd --version`, else `dotnet tool install -g ilspycmd`
    (tell the user you're installing it).
 4. Build the API index once: `scripts/api-search.ps1 -Game2Dir <dir> -Type 'ThrustComponent$'`
-   (first run indexes the game's ~75 DLLs in ~10 s, cached per game version under
+   (first run indexes the game's DLLs, which can take a minute or two; cached per game version under
    `%LOCALAPPDATA%\prototype-engineers\api-cache\`).
 5. **Helper agents**: `scripts/install-agents.ps1 -Check`. Missing or out of date → run it without
    `-Check` (copies `agents\*.md` to `%USERPROFILE%\.claude\agents`); they're usable from the next

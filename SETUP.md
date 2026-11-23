@@ -25,7 +25,8 @@ file you read in step 1: find the user's Steam install of Space Engineers 2 and 
 SDK and the other tools it lists.
 
 For anything missing, tell the user exactly what to install and offer to do it for them. Always
-ask before installing anything. If the game isn't installed through Steam, say so and stop there:
+ask before installing anything - this overrides any "just install it" wording in `SKILL.md`
+(for example for `ilspycmd`). If the game isn't installed through Steam, say so and stop there:
 the skill only works with the retail Steam version.
 
 ## 3. Carry on
