@@ -62,6 +62,14 @@ project template and notes on the game's code. Any assistant that can read files
 PowerShell can follow it.
 
 `SETUP.md` has your assistant work out which tool it is and pick the matching flow from the
-`setup\` folder: one for Claude Code, which registers the skill and its helper agents, and one for
-every other assistant, which follows the same instructions directly. The skill has been built and
-tested with Claude Code; the other flow is new, so tell us how it goes with your tool.
+`setup\` folder:
+
+| Assistant | What setup does |
+|---|---|
+| Claude Code | Registers the skill and its helper agents |
+| OpenAI Codex (ChatGPT's coding agent) | Links the skill into Codex's own skills folder |
+| Google Antigravity (Gemini and other models) | Adds the skill to Antigravity's skill registry |
+| Anything else | Follows the same instructions directly, with nothing to register |
+
+The skill was built with Claude Code. Setup has also been run with Codex and Antigravity; building
+a whole prototype with them, and the "anything else" flow, are new, so tell us how it goes.
