@@ -25,14 +25,27 @@ You don't need the Hub to use the skill, or the skill to use the Hub.
 
 ## Install
 
-The easy way: paste this into Claude Code and let it do the work.
+The easy way: paste this into your AI coding assistant (it is built for Claude Code) and let it
+do the work. It gets the skill, checks what your PC needs and then carries on in the same
+conversation.
 
 ```text
-Install the PrototypeEngineers skill for Space Engineers 2 for me. Clone
-https://github.com/KeenSoftwareHouse/Se2PrototypeHubandSkill into
-%USERPROFILE%\.claude\prototype-engineers-skill (if that folder is already a clone, run git pull
-in it instead), then run install.ps1 from that folder with PowerShell and show me what it printed.
-When it is done, remind me to start a new Claude Code session and ask for "prototype X in SE2".
+Set up the PrototypeEngineers skill for Space Engineers 2 on this PC and guide me through
+anything you can't do yourself. Do it step by step and tell me what you're doing.
+
+1. Get the skill from https://github.com/KeenSoftwareHouse/Se2PrototypeHubandSkill into
+   %USERPROFILE%\.claude\prototype-engineers-skill. If the folder is already a git clone, run
+   git pull in it. If git isn't installed, download
+   https://github.com/KeenSoftwareHouse/Se2PrototypeHubandSkill/archive/refs/heads/main.zip
+   and extract it there instead.
+2. If you are Claude Code, run install.ps1 from that folder with PowerShell and show me what it
+   printed.
+3. Read prototype-engineers\SKILL.md in that folder now and follow its "Environment" section:
+   find my Steam install of Space Engineers 2 and check the .NET SDK and the other tools it
+   lists. For anything missing, tell me exactly what to install and offer to do it for me; ask
+   before installing anything.
+4. When everything is ready, don't stop: ask me what I'd like to prototype, and keep following
+   SKILL.md from that folder in this same conversation.
 ```
 
 Or by hand:
