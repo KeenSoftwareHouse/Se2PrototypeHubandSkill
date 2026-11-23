@@ -9,8 +9,9 @@
      blocks that. Before running anything, ask the user for full access (or approval for each of
      these): your skills folder (the install script), the skill home's `.git` folder (`git pull`
      and the update check), `%LOCALAPPDATA%\prototype-engineers\` (API index, remembered Steam
-     path, saved discoveries), the folder where their prototype projects live, and read access to
-     the game folder. If the session cannot ask for approval at all, tell the user which of these
+     path, saved discoveries), the folder where their prototype projects live, NuGet's folders
+     (`%APPDATA%\NuGet` and `%USERPROFILE%\.nuget\packages` - without them `dotnet build` and the
+     scaffold fail with "NuGet.Config access denied"), and read access to the game folder. If the session cannot ask for approval at all, tell the user which of these
      were blocked and stop there.
    - "SKIPPED - ... a folder this installer did not create": ask the user whether to rename that
      folder, then run the script again.
@@ -35,7 +36,7 @@
 | Model names and token costs in "Cheaper helpers" | Ignore the numbers; keep the idea: bulky, checkable reading (decompiled code, long logs) is worth handing off, because it stays in your context. |
 | "AskUserQuestion" | Your `request_user_input` tool where you have it; otherwise ask in your reply and wait for the answer. |
 | "next session" / "new session" | The user's next message, or a new thread. |
-| `plugin.json` field `builtWith` (the template's default text) | Ask the user what to write; suggest "Codex". Never put your own name in `author`. |
+| Paths inside `agents\<name>.md` that start `%USERPROFILE%\.claude\skills\prototype-engineers` | Read them as `<skill home>\prototype-engineers`, and say so when you pass that file to a sub-agent. |
 | Game and build commands | They need the user's game folder, the .NET SDK and the NuGet cache, all outside the workspace: ask for the access you need rather than working around it. |
 
 Everything else - the scripts, the project template, the rules in sections 3 to 5, the API

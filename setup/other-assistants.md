@@ -30,7 +30,7 @@ skill in `<skill home>`".
 | Model names and token costs in "Cheaper helpers" | Ignore the numbers; keep the idea: bulky, checkable reading (decompiled code, long logs) is worth handing off or keeping short, because it stays in your context. |
 | "AskUserQuestion" | Ask the user in the chat and wait for the answer. |
 | "next session" / "new session" | Whatever starts a fresh conversation in your tool. |
-| `plugin.json` field `builtWith` (the template's default text) | Ask the user what to write; suggest the name of the tool you are. Never put your own name in `author`. |
+| Paths inside `agents\<name>.md` that start `%USERPROFILE%\.claude\skills\prototype-engineers` | Read them as `<skill home>\prototype-engineers`, and say so when you pass that file to a sub-agent. |
 
 Everything else - the scripts, the project template, the rules in sections 3 to 5, the API
 cookbook, where discoveries are saved - is tool-independent. Follow it exactly.

@@ -15,8 +15,13 @@
   Codex and Antigravity flows were run on a PC with both installed.
 - The setup carries on in the same conversation: it checks the PC, then asks what to prototype.
 
+- Codex and Antigravity each built a small test prototype with the skill (a cockpit speed
+  readout): both scaffolded, looked up the game code, built cleanly and passed the offline
+  check. Neither was run in the game.
+
 ### Fixed
 - `SKILL.md` said the first API index takes about 10 seconds; it can take a minute or two.
+- The API cookbook said `Vector3` has no `Length()`; on retail 4.0.0.3169 it does.
 
 ## 1.0.2
 
