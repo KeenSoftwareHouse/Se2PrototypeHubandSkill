@@ -6,6 +6,16 @@ builds it, launches the game with it and iterates with you.
 
 Works with the **retail Steam version** of Space Engineers 2 only.
 
+## SE2 Prototype Hub
+
+The **SE2 Prototype Hub** is a small Windows app for browsing the public prototype plugins and
+launching the game with one of them. Download `SE2PrototypeHub.exe` from this repo's
+[**tools** release](../../releases/tag/tools), put it somewhere you own (Desktop or Documents, not
+Program Files) and run it; it updates itself after that. The first time, Windows may show
+"Windows protected your PC" because the app isn't code-signed: click **More info**, then **Run anyway**.
+
+You don't need the Hub to use the skill, or the skill to use the Hub.
+
 ## Requirements
 
 - Windows, Space Engineers 2 installed through Steam
