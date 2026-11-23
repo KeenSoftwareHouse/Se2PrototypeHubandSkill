@@ -1,5 +1,15 @@
 # PrototypeEngineers skill - Changelog
 
+## 1.0.2
+
+### Added
+- The README has a prompt to paste into Claude Code that clones and installs the skill for you.
+
+### Fixed
+- The runtime-mesh note in the API cookbook named an engine helper that the retail game doesn't
+  have. The cookbook's newer notes were re-checked against retail 4.0.0.3169: every other game
+  type and member they name exists there.
+
 ## 1.0.1
 
 ### Added

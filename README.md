@@ -15,6 +15,18 @@ Works with the **retail Steam version** of Space Engineers 2 only.
 
 ## Install
 
+The easy way: paste this into Claude Code and let it do the work.
+
+```text
+Install the PrototypeEngineers skill for Space Engineers 2 for me. Clone
+https://github.com/KeenSoftwareHouse/Se2PrototypeHubandSkill into
+%USERPROFILE%\.claude\prototype-engineers-skill (if that folder is already a clone, run git pull
+in it instead), then run install.ps1 from that folder with PowerShell and show me what it printed.
+When it is done, remind me to start a new Claude Code session and ask for "prototype X in SE2".
+```
+
+Or by hand:
+
 ```powershell
 git clone https://github.com/KeenSoftwareHouse/Se2PrototypeHubandSkill "$env:USERPROFILE\.claude\prototype-engineers-skill"
 & "$env:USERPROFILE\.claude\prototype-engineers-skill\install.ps1"
