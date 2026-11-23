@@ -11,7 +11,9 @@ You know what tool you are running as. Pick the one that matches and read that f
 | You are | Read and follow |
 |---|---|
 | Claude Code (the CLI, the desktop app's Code tab, or an IDE extension) | `setup\claude-code.md` |
-| Anything else (Codex, Cursor, Gemini CLI, Copilot, Windsurf, ...) | `setup\other-assistants.md` |
+| OpenAI Codex / ChatGPT's coding agent (CLI, desktop app or IDE extension) | `setup\codex.md` |
+| Google Antigravity, whichever model you run on (agy CLI, desktop app or IDE) | `setup\antigravity.md` |
+| Anything else (Cursor, Gemini CLI, Copilot, Windsurf, ...) | `setup\other-assistants.md` |
 
 Not sure? Use `setup\other-assistants.md`: it assumes nothing about your tool. Tell the user in
 one line which flow you picked.
