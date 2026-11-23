@@ -59,6 +59,9 @@ Then ask your assistant to follow `SETUP.md` again.
 
 The skill is plain files: instructions (`prototype-engineers\SKILL.md`), PowerShell scripts, a
 project template and notes on the game's code. Any assistant that can read files and run
-PowerShell can follow it. It has been built and tested with Claude Code, where `SETUP.md` also
-registers it as a skill and adds helper agents that keep long research cheap; other assistants
-follow the same instructions without those extras.
+PowerShell can follow it.
+
+`SETUP.md` has your assistant work out which tool it is and pick the matching flow from the
+`setup\` folder: one for Claude Code, which registers the skill and its helper agents, and one for
+every other assistant, which follows the same instructions directly. The skill has been built and
+tested with Claude Code; the other flow is new, so tell us how it goes with your tool.

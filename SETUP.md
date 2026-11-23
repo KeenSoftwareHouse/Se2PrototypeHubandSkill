@@ -4,23 +4,23 @@ You are reading this because the user asked you to set up the PrototypeEngineers
 folder (the one containing this file) is the skill's home. Work through the steps in order, tell
 the user what you are doing, and guide them through anything you cannot do yourself.
 
-## 1. Register the skill, if your tool has skills
+## 1. Work out which assistant you are, and follow that flow
 
-- **Claude Code**: run `install.ps1` from this folder with
-  `powershell -NoProfile -ExecutionPolicy Bypass -File install.ps1` and show the user what it
-  printed. It links the skill into the user's skills folder and installs the helper agents. They
-  load in the user's next session; for this session keep going with step 2.
-- **Any other assistant**: nothing to register. The instructions are in
-  `prototype-engineers\SKILL.md`; where it names a helper agent (`pe-api-scout`, `pe-log-reader`,
-  `pe-build-fixer`, `pe-reviewer`), do that job yourself, following `prototype-engineers\agents\<name>.md`.
-  If your tool has a place for standing project or user instructions, offer to add a line there
-  saying: "For Space Engineers 2 prototypes, read and follow
-  `<this folder>\prototype-engineers\SKILL.md`."
+You know what tool you are running as. Pick the one that matches and read that file now:
+
+| You are | Read and follow |
+|---|---|
+| Claude Code (the CLI, the desktop app's Code tab, or an IDE extension) | `setup\claude-code.md` |
+| Anything else (Codex, Cursor, Gemini CLI, Copilot, Windsurf, ...) | `setup\other-assistants.md` |
+
+Not sure? Use `setup\other-assistants.md`: it assumes nothing about your tool. Tell the user in
+one line which flow you picked.
 
 ## 2. Check the PC
 
-Read `prototype-engineers\SKILL.md` now and follow its "Environment" section: find the user's Steam
-install of Space Engineers 2 and check the .NET SDK and the other tools it lists.
+Read `prototype-engineers\SKILL.md` and follow its "Environment" section, as adjusted by the flow
+file you read in step 1: find the user's Steam install of Space Engineers 2 and check the .NET
+SDK and the other tools it lists.
 
 For anything missing, tell the user exactly what to install and offer to do it for them. Always
 ask before installing anything. If the game isn't installed through Steam, say so and stop there:
