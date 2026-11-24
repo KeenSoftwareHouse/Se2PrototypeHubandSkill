@@ -11,8 +11,9 @@ Works with the **retail Steam version** of Space Engineers 2 only.
 The **SE2 Prototype Hub** is a small Windows app for browsing the public prototype plugins and
 launching the game with one of them. Download `SE2PrototypeHub.exe` from this repo's
 [**tools** release](../../releases/tag/tools), put it somewhere you own (Desktop or Documents, not
-Program Files) and run it; it updates itself after that. The first time, Windows may show
-"Windows protected your PC" because the app isn't code-signed: click **More info**, then **Run anyway**.
+Program Files) and run it; it updates itself after that. The app is signed by Keen Software House
+s.r.o. If Windows still shows "Windows protected your PC" the first time, click **More info**, check
+that the publisher is Keen Software House s.r.o., then **Run anyway**.
 
 You don't need the Hub to use the skill, or the skill to use the Hub.
 
