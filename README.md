@@ -74,3 +74,7 @@ PowerShell can follow it.
 
 The skill was built with Claude Code. Setup has also been run with Codex and Antigravity; building
 a whole prototype with them, and the "anything else" flow, are new, so tell us how it goes.
+
+## Licence
+
+MIT - see [LICENSE.txt](LICENSE.txt).
